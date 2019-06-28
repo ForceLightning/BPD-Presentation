@@ -5436,19 +5436,49 @@
 
 				if( deltaX > touch.threshold && Math.abs( deltaX ) > Math.abs( deltaY ) ) {
 					touch.captured = true;
-					navigateLeft();
+					if( config.navigationMode === 'linear' ) {
+						if( config.rtl ) {
+							navigateNext();
+						}
+						else {
+							navigatePrev();
+						}
+					}
+					else {
+						navigateLeft();
+					}
 				}
 				else if( deltaX < -touch.threshold && Math.abs( deltaX ) > Math.abs( deltaY ) ) {
 					touch.captured = true;
-					navigateRight();
+					if( config.navigationMode === 'linear' ) {
+						if( config.rtl ) {
+							navigatePrev();
+						}
+						else {
+							navigateNext();
+						}
+					}
+					else {
+						navigateRight();
+					}
 				}
 				else if( deltaY > touch.threshold ) {
 					touch.captured = true;
-					navigateUp();
+					if( config.navigationMode === 'linear' ) {
+						navigatePrev();
+					}
+					else {
+						navigateUp();
+					}
 				}
 				else if( deltaY < -touch.threshold ) {
 					touch.captured = true;
-					navigateDown();
+					if( config.navigationMode === 'linear' ) {
+						navigateNext();
+					}
+					else {
+						navigateDown();
+					}
 				}
 
 				// If we're embedded, only block touch events if they have

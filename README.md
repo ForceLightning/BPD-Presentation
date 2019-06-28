@@ -1292,7 +1292,7 @@ Reveal.addEventListener( 'ready', () => console.log( 'Three seconds later...' ) 
 Reveal.initialize();
 ```
 
-If the init method does _not_ return a Promise, the plugin is considered ready right away and will not hold up the reveal.js startup sequence.
+Note that reveal.js will *not* wait for init Promise fullfillment if the plugin is loaded as an [async dependency](#dependencies). If the plugin's init method does _not_ return a Promise, the plugin is considered ready right away and will not hold up the reveal.js startup sequence.
 
 ### Retrieving Plugins
 
@@ -1455,7 +1455,7 @@ Reveal.initialize({
 
 	math: {
 		mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-		config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+		config: 'TeX-AMS_HTML-full', // See http://docs.mathjax.org/en/latest/config-files.html
 		// pass other options into `MathJax.Hub.Config()`
 		TeX: { Macros: macros }
 	},

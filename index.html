@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	
-	<title>reveal.js</title>
+	<title>BPD Final Presentation</title>
 	
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/reveal.css">
@@ -26,7 +26,7 @@
 <body>
 	<div class="reveal">
 		<s class="slides">
-			<section><h1>BPD Interim Presentation</h1>
+			<section><h1>BPD Final Presentation</h1>
 				<p>
 					<large>Christopher Kok Yong En<br>Supervisor: Dr U. Rajendra Acharya</large>
 				</p>
@@ -186,6 +186,11 @@
 							<img class="stretch" data-src="images/conv.png">
 							<small>Taken from: <a href="https://cdn-images-1.medium.com/max/1600/1*7S266Kq-UCExS25iX_I_AQ.png">https://cdn-images-1.medium.com/max/1600/1*7S266Kq-UCExS25iX_I_AQ.png</a></small>
 						</section>
+						<section>
+							<small>The output value of layer with input size \((N, C_{in}, L)\) and output \((N, C_{out}, L_{out})\) can be described as</small>
+							<large>$$out(N_{i}, C_{out_{j}}) = bias(C_{out_{j}}) + \sum_{k=0}^{C_{in}-1}weight(C_{out_{j}}, k) * input(N_{i}, k)$$</large><br>
+							<small>where \(*\) is the cross-correlation operator, \(N\) is the batch size, \(C\) denotes a number of channels, \(L\) is a length of signal sequence.</small>
+						</section>
 						<section><h4>Temporal Convolutional Network (TCN)</h4>
 							<img class="stretch" data-src="images/Dilated_Conv.png">
 							<p>
@@ -197,18 +202,33 @@
 							<img class="stretch" data-src="images/ADAMWR5_block.svg">
 						</section>
 						<section><h5>Complete Architecture</h5>
-							<img class="stretch" data-src="images/ADAMWR5_archi.svg">
+							<img class="stretch" data-src="images/archi-Together.svg">
+						</section>
+						<section><h3>Cyclic Learning Rates</h3></section>
+						<section><h4>Warm Restarts</h4>
+							<img class="stretch" data-src="images/sgd_ss.png">
+						</section>
+						<section><h4>Cosine Annealing</h4>
+							<img class="stretch" data-src="images/cosine_annealing.png">
+						</section>
+						<section><h4>1-Cycle Policy</h4>
+							<img class="stretch" data-src="images/1-Cycle.png">
 						</section>
 					</section>
 					<section><section><h2>Results</h2></section>
-					<section><h3>Confusion Matrix</h3>
-						<img class="stretch" data-src="images/cnf_mat_interim.png">
+					<section>
+						<h2>SGD-WR Model</h2>
+						<img class="stretch" data-src="images/archi-SGDWR.svg">
 					</section>
-					<section><h3>Confusion Matrix (Table Form)</h3>
-						<table class="stretch">
+					<section><h3>Confusion Matrix</h3>
+						<table>
 							<tr>
 								<th colspan="2" rowspan="2"></th>
-								<th colspan="5">Predicted</th>
+								<th>Predicted</th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
 								<th rowspan="2">acc (%)</th>
 								<th rowspan="2">ppv (%)</th>
 								<th rowspan="2">sen (%)</th>
@@ -216,80 +236,196 @@
 							</tr>
 							<tr>
 								<td>N</td>
-								<td>V</td>
+								<td>V<br></td>
 								<td>S</td>
 								<td>Q</td>
 								<td>F</td>
 							</tr>
 							<tr>
-								<td rowspan="5">Original</td>
+								<th>Original</th>
 								<td>N</td>
 								<td>20098</td>
 								<td>3018</td>
 								<td>12568</td>
 								<td>2746</td>
 								<td>6861</td>
-								<td>88.77</td>
+								<td>79.91</td>
 								<td>99.17</td>
 								<td>44.38</td>
-								<td>99.53</td>
+								<td>87.74</td>
 							</tr>
 							<tr>
+								<td></td>
 								<td>V</td>
 								<td>66</td>
 								<td>44644</td>
 								<td>142</td>
 								<td>40</td>
 								<td>399</td>
-								<td>80.55</td>
+								<td>99.36</td>
 								<td>93.50</td>
 								<td>98.57</td>
-								<td>85.98</td>
+								<td>99.59</td>
 							</tr>
 							<tr>
+								<td></td>
 								<td>S</td>
 								<td>101</td>
 								<td>60</td>
 								<td>45106</td>
 								<td>22</td>
 								<td>2</td>
-								<td>93.95</td>
+								<td>99.82</td>
 								<td>78.02</td>
 								<td>99.59</td>
-								<td>85.72</td>
+								<td>99.88</td>
 							</tr>
 							<tr>
+								<td></td>
 								<td>Q</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>
-								<td>45291<br></td>
+								<td>45291</td>
 								<td>0</td>
-								<td>98.62</td>
+								<td>100.00</td>
 								<td>94.16</td>
 								<td>100.00</td>
-								<td>85.62</td>
+								<td>100.00</td>
 							</tr>
 							<tr>
+								<td></td>
 								<td>F</td>
 								<td>1</td>
 								<td>26</td>
 								<td>0</td>
 								<td>0</td>
-								<td>45264</td>
-								<td>96.49</td>
+								<td>45262</td>
+								<td>99.97</td>
 								<td>86.17</td>
 								<td>99.94</td>
-								<td>85.63</td>
+								<td>99.98</td>
+							</tr>
+							<tr>
+								<td>Average</td>
+								<td colspan="6"></td>
+								<td>95.81</td>
+								<td>90.20</td>
+								<td>88.50</td>
+								<td>97.44</td>
 							</tr>
 						</table>
 						<small>acc = accuracy, ppv = positive predictive value, sen = sensitivity, spec = specificity</small>
 					</section>
-					<section><h3>Loss Function over Epoch</h3>
-						<img class="stretch" data-src="images/loss_interim.png">
+					<section>
+						<h3>Metrics</h3>
+						<img class="stretch" data-src="images/sgdwr.png">
 					</section>
-					<section><h3>Accuracy over Epoch</h3>
-						<img class="stretch" data-src="images/acc_interim.png">
+					<section>
+						<h2>1-Cycle AdamW Model</h2>
+						<img class="stretch" data-src="images/archi-AdamW.svg">
+					</section>
+					<section>
+						<h3>Confusion Matrix</h3>
+						<table class="stretch">
+							<tr>
+								<th colspan="2" rowspan="2"></th>
+								<th>Predicted</th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th rowspan="2">acc (%)</th>
+								<th rowspan="2">ppv (%)</th>
+								<th rowspan="2">sen (%)</th>
+								<th rowspan="2">spec (%)</th>
+							</tr>
+							<tr>
+								<td>N</td>
+								<td>V<br></td>
+								<td>S</td>
+								<td>Q</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<th>Original</th>
+								<td>N</td>
+								<td>23920</td>
+								<td>2742</td>
+								<td>11072</td>
+								<td>2892</td>
+								<td>4665</td>
+								<td>82.59</td>
+								<td>98.85</td>
+								<td>52.81</td>
+								<td>89.32</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>V</td>
+								<td>49</td>
+								<td>44230</td>
+								<td>224</td>
+								<td>103</td>
+								<td>685</td>
+								<td>98.96</td>
+								<td>91.15</td>
+								<td>97.66</td>
+								<td>99.34</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>S</td>
+								<td>166</td>
+								<td>1190</td>
+								<td>44789</td>
+								<td>95</td>
+								<td>51</td>
+								<td>98.54</td>
+								<td>79.70</td>
+								<td>96.76</td>
+								<td>99.06</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Q</td>
+								<td>19</td>
+								<td>64</td>
+								<td>58</td>
+								<td>45063</td>
+								<td>87</td>
+								<td>99.78</td>
+								<td>93.28</td>
+								<td>99.50</td>
+								<td>99.86</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>F</td>
+								<td>44</td>
+								<td>301</td>
+								<td>51</td>
+								<td>157</td>
+								<td>44738</td>
+								<td>99.46</td>
+								<td>89.07</td>
+								<td>98.78</td>
+								<td>99.65</td>
+							</tr>
+							<tr>
+								<td>Average</td>
+								<td colspan="6"></td>
+								<td>95.87</td>
+								<td>90.41</td>
+								<td>89.10</td>
+								<td>97.44</td>
+							</tr>
+						</table>
+						<small>acc = accuracy, ppv = positive predictive value, sen = sensitivity, spec = specificity</small>
+					</section>
+					<section>
+						<h3>Metrics</h3>
+						<img class="stretch" data-src="images/metrics.png">
 					</section>
 				</section>
 				<section><h2>References</h2>
@@ -316,6 +452,7 @@
 				{ src: 'plugin/markdown/marked.js' },
 				{ src: 'plugin/markdown/markdown.js' },
 				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/math/math.js', async: true },
 				{ src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js', async: true },
 				// { src: 'plugin/reveal.js-plugins/broadcast/socket.io.js'},
 				{ src: 'plugin/notes-server/client.js', async: true },
@@ -365,5 +502,4 @@
 			});
 		</script>
 	</body>
-	</html>
-	
+</html>

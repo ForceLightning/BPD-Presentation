@@ -160,9 +160,16 @@
 							<small>Taken from: <a href="https://cdn-images-1.medium.com/max/1600/1*7S266Kq-UCExS25iX_I_AQ.png">https://cdn-images-1.medium.com/max/1600/1*7S266Kq-UCExS25iX_I_AQ.png</a></small>
 						</section>
 						<section>
+							<p>
 							<small>The output value of layer with input size \((N, C_{in}, L)\) and output \((N, C_{out}, L_{out})\) can be described as</small>
-							<large>$$out(N_{i}, C_{out_{j}}) = bias(C_{out_{j}}) + \sum_{k=0}^{C_{in}-1}weight(C_{out_{j}}, k) * input(N_{i}, k)$$</large><br>
-							<small>where \(*\) is the cross-correlation operator, \(N\) is the batch size, \(C\) denotes a number of channels, \(L\) is a length of signal sequence.</small>
+							<large>$$out(N_{i}, C_{out_{j}}) = bias(C_{out_{j}}) + \sum_{k=0}^{C_{in}-1}weight(C_{out_{j}}, k) \star input(N_{i}, k)$$</large><br>
+							<small>where \(\star\) is the cross-correlation operator, \(N\) is the batch size, \(C\) denotes a number of channels, \(L\) is a length of signal sequence, and
+							$$L_{out}=\left \lfloor \frac{L_{in}+2\times \text{padding}-\text{dilation}\times(\text{kernel_size}-1)}{\text{stride}} +1 \right \rfloor$$
+							<br>
+							<br>
+							Implemented with open sourced library PyTorch (Adam et al., 2017)
+							</small>
+							</p>
 						</section>
 						<section><h4>Temporal Convolutional Network (TCN)</h4>
 							<img class="stretch" data-src="images/Dilated_Conv.png">
@@ -404,6 +411,7 @@
 				</section>
 				<section><h2>References</h2>
 					<ul>
+						<li>Adam, P., Soumith, C., Gregory, C., Edward, Y., Zachary, D., Zeming, L., … Adam, L. (2017). Automatic differentiation in pytorch. In Proceedings of Neural Information Processing Systems.</li>
 						<li>Pedraza, A., Gallego, J., Lopez, S., Gonzalez, L., Laurinavicius, A., & Bueno, G. (2017). Glomerulus Classification with Convolutional Neural Networks. In Communications in Computer and Information Science (pp. 839–849). Springer International Publishing. https://doi.org/10.1007/978-3-319-60964-5_73</li>
 						<li>van den Oord, A., Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A., … Kavukcuoglu, K. (2016). WaveNet: A Generative Model for Raw Audio. Retrieved from http://arxiv.org/abs/1609.03499</li>
 					</ul>
